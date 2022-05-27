@@ -1,0 +1,194 @@
+OBJETO WINDOW -> representa la ventana que contiene al documento
+              -> funciones: 
+                  - window.location → Retorna un objeto con los detalles de la URL, 
+                    la ruta, el href, etc.
+                  - window.height y window.width → Retorna la altura y/o el ancho
+                    de la pantalla actual de la ventana.
+
+OBJETO DOCUMENT -> representa al DOM (documento HTML) cargado en esa ventana 
+                -> funciones:
+                  - window.document.title → Retorna el título del documento sobre el que estamos navegando. 
+                  - Sin embargo, JS Front nos permite abreviarlo así: document.title
+
+DOM -> (Document Object Model) representa al documento que se carga en el
+       navegador como un árbol de nodos, en donde cada nodo representa una parte del documento.
+
+* window y document es la manera en la que JavaScript nos da acceso a los elementos presentes 
+en el documento HTML para que a través de estas funcionalidades podamos manipular el contenido
+según nuestro criterio y necesidades.
+
+QUERYSELECTOR -> es una variable de document 
+              -> nos permite decir donde queremos ejecutar un cambio 
+                 document.querySelector("form") trae una etiqueta
+              -> dentro de los parentesis colocamos el objeto a modificar 
+                 puede ser:
+                 . etiqueta 
+                 . etiqueta + clase ("form.registro")
+                 . etiqueta + id  ("form#registro")
+                 . clase o id 
+              -> document.querySelectorAll trae todas las etiquetas
+              -> a todos necesito almacenarlo en una variable 
+                let elForm =  document.querySelector("form")
+
+MODIFICANDO EL DOM: 
+innerHTML:
+  -> podemos modificar el contenido de las etiquetas desde el js 
+    let titulo = document.querySelector('h1')
+    titulo.innerHTML = 'Soy titulo nuevo ' 
+  -> agregarle algo 
+    titulo.innerHTML = titulo.innerHTML + 'esto e snuevo'
+  -> let body = document.querySelector('body').innerHTML += '<mark>Javascript ROCKS</mark>'
+innerText:
+  -> si solo necesito cambiar un texto plano 
+  -> let h3 = document.querySelector('h3').innerText += " usando código"
+
+
+MODIFICANDO ESTILOS: 
+  - window.addEventListener('load', function() {
+  let body = document.querySelector('body').style.backgroundColor = 'lightskyblue';
+
+  let h2 = document.querySelector('h2').style.textAlign = 'center';
+
+  let h4 = document.querySelector('h4').style.fontStyle = 'italic';
+  });
+
+ -  window.addEventListener('load', function() {
+
+  let libros = document.querySelectorAll('li')    
+  for(let libro of libros) {
+  libro.style.color = "orange"
+  }
+
+  });
+
+MODIFICANDO CLASES: 
+  -> agregar o modificar las clases que ya tiene esa etiqueta
+  -> .classList 
+  -> 3 cosas que podemos hacer: 
+    - .add: agrega una clase 
+      document.querySelectorAll('li').classList.add('negrita')
+
+    - .remove le quita la clase
+      document.querySelectorAll('li').classList.remove('negrita')
+
+    - .toggle hace la validacion si la clase ya existe la quita y si no la agrega
+      document.querySelectorAll('li').classList.toggle('negrita')
+
+    - .contains si el elemnto tiene la clase o no, devuelve un valor booleano
+
+
+EVENTOS: 
+- Es algo que pasa en el documento HTML y que comúnmente es ejecutado por parte de la persona que usa nuestro aplicativo.
+-  window.onload = function(){} solo puede tener un evento 
+- window.addEventListener('load', function(){ cuando la pag se termine de cargar 
+  this.alert(1)
+})
+
+- preventDefault() cancela lo que ya tenia predefinido sea un hipervinculo o enviar un form etc 
+
+EVENTOS DE MOUSE
+
+-Click: 
+window.addEventListener('load', function(){
+
+    const specialAnchor = document.querySelector("a");
+    
+    specialAnchor.addEventListener('click', () => {
+        this.style.color = "red";
+        this.innerText = "este enlace no te llevará a ningún lado";
+        event.preventDefault()
+    })
+    
+})
+para 1 boton
+  window.addEventListener("load", function(){
+    let homeButton = document.querySelector(".homeButton") //definimos DONDE es el evento
+    homeButton.addEventListener("click", function(){ //CUANDO
+      homeButton.style.color ="red"; //va a cambiar a rojo
+      homeButton.style.color =prompt("elija su colro");
+    }) 
+  })
+para todos los botones
+   window.addEventListener("load", function(){
+    let botones = document.querySelectorAll(".w3-button") //definimos DONDE es el evento
+    for(let i = 0; i < botones.length; i ++){
+      botones[i].addEventListener("click", function(){
+        this.style.color = "red"
+      })
+    }
+  })
+-dbclick
+-mouseover:
+window.addEventListener('load', function() {
+
+  let titulo = document.querySelector("h1");
+    titulo.addEventListener("mouseover", function(){ 
+      titulo.classList.add('.titulo') 
+    })
+
+});
+-mouseout: 
+window.addEventListener('load', function() {
+
+  let links = document.querySelectorAll("a")
+
+  for(let link of links) {
+    link.addEventListener("mouseout", function(){
+        this.classList.toggle('dark-mode')
+      })
+  }
+
+});
+
+
+EVENTOS DEL TECLADO
+
+- keydown (presionar)
+window.addEventListener('load', function() {
+
+  let userName = document.querySelector("#userName")
+ 
+    userName.addEventListener('keydown', function(event){
+        if (event.key == "#") {
+          alert("Está prohibido el uso de #hashtags!")
+        }
+    })
+});
+
+- keyup (soltar)
+
+-keypress (finalizar el recorrido completo)
+window.addEventListener('load', function(){
+
+    let direccion = document.querySelector("#address")
+
+    direccion.addEventListener('keypress', function(event){
+        tecla = event.key;
+         alert("Se presionó la tecla: "+ tecla);
+    })
+
+})
+
+evento onkeypress : 
+  - charCode 
+  - KeyCode
+  - key 
+
+callback addEventListener
+
+ window.addEventListener("load", function(){
+    let botones = document.querySelectorAll(".w3-button") //definimos DONDE es el evento
+    for(let i = 0; i < botones.length; i ++){
+      botones[i].addEventListener("click", function(){
+        this.style.color = "red"
+      })
+    }
+
+    window.addEventListener("keypress", function(){
+      alert(1); 
+      console.log(e.key) // nos dice que tecla se presiono
+        if (e.key == "Enter") {
+          alert("eey enter")
+        }
+    })
+  })
