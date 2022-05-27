@@ -115,6 +115,8 @@ para todos los botones
       botones[i].addEventListener("click", function(){
         this.style.color = "red"
       })
+
+      
     }
   })
 -dbclick
@@ -192,3 +194,4 @@ callback addEventListener
         }
     })
   })
+
